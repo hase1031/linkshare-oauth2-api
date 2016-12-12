@@ -29,7 +29,12 @@ module Linkshare
   end
 
   def self.token
-    @token ||= Linkshare::Strategy.new(client).get_token(Linkshare.username, Linkshare.password, Linkshare.sid);
+    if @token.nil?
+      @token = Linkshare::Strategy.new(client).get_token(Linkshare.username, Linkshare.password, Linkshare.sid)
+    elsif @token.expired?
+      @token = @token.refresh!({scope: Linkshare.sid})
+    end
+    @token
   end
 
   def self.coupon
