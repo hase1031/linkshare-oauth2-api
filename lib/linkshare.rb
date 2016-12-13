@@ -60,6 +60,10 @@ module Linkshare
     @events ||= Linkshare::Events.new
   end
 
+  def self.set_token(token)
+    @token = token
+  end
+
   def self.refresh_token
     @token.refresh!
   end
