@@ -29,7 +29,7 @@ module Linkshare
   end
 
   def self.token
-    @token ||= Linkshare::Strategy.new(client).get_token(Linkshare.username, Linkshare.password, Linkshare.sid);
+    @token ||= Linkshare::Strategy.new(client).get_token(Linkshare.username, Linkshare.password, Linkshare.sid)
   end
 
   def self.coupon
@@ -60,8 +60,12 @@ module Linkshare
     @events ||= Linkshare::Events.new
   end
 
+  def self.refresh_token
+    @token.refresh!
+  end
+
   protected
-   
+
   def self.client
     @client ||=  OAuth2::Client.new(Linkshare.consumer_key, Linkshare.consumer_secret, :site => SITE, :token_url => TOKEN_URL)
   end
