@@ -64,8 +64,6 @@ module Linkshare
     @token.refresh!
   end
 
-  protected
-
   def self.client
     @client ||=  OAuth2::Client.new(Linkshare.consumer_key, Linkshare.consumer_secret, :site => SITE, :token_url => TOKEN_URL)
   end
