@@ -10,6 +10,7 @@ module Linkshare
     # @param [Hash] params additional params
     def get_token(username, password, sid, params = {}, opts = {})
       request_body = opts.delete('auth_scheme') == 'request_body'
+      client_params = {'client_id' => @client.id, 'client_secret' => @client.secret}
       params = {'grant_type' => 'password',
                 'username'   => username,
                 'password'   => password,
